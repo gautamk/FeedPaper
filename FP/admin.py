@@ -5,5 +5,5 @@ from django.contrib import admin
 class MyAdmin(admin.ModelAdmin):
     pass
 
-admin.site.register(feedDB , MyAdmin)
+admin.site.register(feedDB )
 admin.site.register(itemDB)

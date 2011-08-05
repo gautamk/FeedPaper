@@ -81,6 +81,10 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    
+    # Change the following path
+    '/home/gautam/Aptana Studio 3 Workspace/FeedPaper/src/FeedPaper/FP/templates',
+    # for some reason the default fallback to templates directory doesn't work
 )
 
 INSTALLED_APPS = (

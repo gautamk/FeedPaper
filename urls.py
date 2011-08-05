@@ -5,6 +5,8 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    (r'^UpdateItems/','FP.views.UpdateItems'),
+    (r'^ShowUpdateItems/','FP.views.ShowUpdateItems'),
     # Example:
     # (r'^FeedPaper/', include('FeedPaper.foo.urls')),
 
@@ -12,5 +14,5 @@ urlpatterns = patterns('',
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    (r'^admin/', include(admin.site.urls)),
+    (r'^admin/', include(admin.site.urls) ),
 )
