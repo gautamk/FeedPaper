@@ -1,4 +1,5 @@
 from django.db import models
+from django import forms
 
 # Create your models here.
 class feedDB(models.Model):
@@ -17,11 +18,10 @@ class itemDB(models.Model):
     
     # Check sum is used to prevent duplication of entries 
     checksum = models.CharField(max_length = 200 , unique = True , null = False)
-    
-    
-    # Add a checksum and add a unique Index to it 
-
-        
-    
+    # Add a checksum and add a unique Index to it
     def __unicode__(self):
         return self.title
+
+class CSVUploadForm(forms.Form):
+    title = forms.CharField(max_length=50)
+    file  = forms.FileField()

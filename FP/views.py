@@ -5,7 +5,19 @@ from django.db import IntegrityError
 from FeedPaper.FP.models import *
 from django.http import HttpResponse ,HttpResponseRedirect
 from django.template import loader , Context
+from django.shortcuts import render_to_response
 
+def CSVUploadView(request):
+    if request.method == "POST":
+        form = CSVUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            from FeedPaper.FP.controllers import parseCSV
+            parseCSV(request.FILES['file'])
+            return HttpResponseRedirect('/admin')
+        else:
+            form = CSVUploadForm()
+        return render_to_response('upload.html', {'form': form , 
+                                                  'error' : 'Unable to Process File / Invalid File',})
 
 def UpdateItems(request):
     feeds = feedDB.objects.all()
@@ -26,8 +38,6 @@ def UpdateItems(request):
                        ).save()
             except IntegrityError:
                 pass
-                
-    
     return HttpResponseRedirect('/admin')
 
 def ShowUpdateItems(request):
