@@ -1,11 +1,14 @@
 # Create your views here
 import feedparser
-import hashlib
+
 from django.db import IntegrityError
 from FeedPaper.FP.models import *
 from django.http import HttpResponse ,HttpResponseRedirect
 from django.template import loader , Context
 from django.shortcuts import render_to_response
+
+
+
 
 def CSVUploadView(request):
     if request.method == "POST":
@@ -20,21 +23,18 @@ def CSVUploadView(request):
                                                   'error' : 'Unable to Process File / Invalid File',})
 
 def UpdateItems(request):
+    from FeedPaper.FP.controllers import calculate_checksum
     feeds = feedDB.objects.all()
     for feed in feeds:
         parse = feedparser.parse(feed.url)
         for entry in parse['entries']:
-            str = entry.title + entry.summary + entry.link # Prepare the strings for Hashing
-            str = str.encode('ascii' , 'xmlcharrefreplace')# Convert Unicode to ascii and replace
-            # non ascii characters with xml reference characters
-            hash = hashlib.sha1(str).hexdigest().encode('utf-8') # Compute sha-1 hash and convert to Unicode
+            
             try: 
                 itemDB(
                        title =  entry.title,
                        description = entry.summary,
                        link_url = entry.link ,
                        feed = feed,
-                       checksum = hash ,
                        ).save()
             except IntegrityError:
                 pass

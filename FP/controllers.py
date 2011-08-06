@@ -13,7 +13,21 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 import csv
+import hashlib
 from FeedPaper.FP.models import feedDB
+
+
+def calculate_checksum(str):
+    """
+        Converts the given non ascii string into sha1 checksum
+        and returns the result in unicode UTF-8 format
+    """
+    # Convert Unicode to ascii and replace
+    # non ascii characters with xml reference characters
+    str = str.encode('ascii' , 'xmlcharrefreplace')
+    # Compute sha-1 hash and convert to Unicode
+    return hashlib.sha1(str).hexdigest().encode('utf-8') 
+    
 
 # This function Parses and adds the CSV file to the feedDB
 def parseCSV(file , ignore_first_line = True):
