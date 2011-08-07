@@ -6,6 +6,8 @@ from FeedPaper.FP.models import feedDB , itemDB , CSVUploadForm
 from django.http import HttpResponse , HttpResponseRedirect
 # from django.template import loader , Context
 from django.shortcuts import render_to_response
+from django.template.loader import render_to_string
+from django.template import Context, loader
 from FeedPaper.FP.controllers import calculate_checksum
 import re, htmlentitydefs
 
@@ -39,20 +41,23 @@ def unescape(text):
 
 def LandingPage(request):
     if request.method == "GET":
+        t = loader.get_template('landing_page.html')
         template_values={
                          'keywords':feedDB.objects.all(),
                          }
         try:
             if request.GET['keyword'] != '' :
                 fdb = feedDB.objects.all().filter(keyword = request.GET['keyword'] )
+                posts = itemDB.objects.all().filter(feed = fdb)
+                for p in posts :
+                    p.description = unescape(p.description)
                 template_values={
                                  'keywords':feedDB.objects.all(),
-                                 'posts':itemDB.objects.all().filter(feed = fdb),
+                                 'posts':posts,
                                  }
-                return render_to_response('landing_page.html',template_values)
+                return HttpResponse(render_to_string('landing_page.html', template_values))
         except KeyError:
-            return render_to_response('landing_page.html',template_values)
-
+            return HttpResponse(render_to_string('landing_page.html', template_values))
 def CSVUploadView(request):
     from django.core.context_processors import csrf
     form = CSVUploadForm(request.POST, request.FILES)
@@ -72,16 +77,15 @@ def CSVUploadView(request):
         return render_to_response('upload.html', c )
 
 def UpdateItems(request):
-    
+    from FeedPaper.BeautifulSoup import BeautifulSoup
     feeds = feedDB.objects.all()
     for feed in feeds:
         parse = feedparser.parse(feed.url)
         for entry in parse['entries']:
-            
             try: 
                 itemDB(
                        title=entry.title,
-                       description= unescape( entry.summary ),
+                       description= ''.join(BeautifulSoup(entry.summary).findAll(text=True)),
                        link_url=entry.link ,
                        feed=feed,
                        ).save()
