@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<link rel="stylesheet" href="/site_media/style.css" type="text/css" media="screen">
+	</head>
+	<body class="home">
+		<div id="outer">
+			<!--outer-->
+			<div id="container">
+				<!--container-->
+				<div id="header">
+					<h1>Feed Paper</h1>
+					<div id="tagline">
+						A paper made from RSS Feeds
+					</div>
+				</div>
+				<ul class="nav">
+					{% block keywords %}
+					<li>
+						<a href="/" accesskey="1"   title="Back to Frontpage">Home</a>
+					</li>
+					{% endblock %}
+				</ul>
+				<div class="ffix"></div>
+				<div id="content">
+					<!--content-->
+					<div class="left">
+						<!--left-->
+						{% block leftposts %}
+						<div class="post">
+							<!--post-->
+							<div class="category">
+								<a href="http://www.designmagz.com/category/lowongan" title="View all posts in Lowongan" rel="category tag">Lowongan</a>
+							</div>
+							<h2><a href="http://www.designmagz.com/lowongan/lowongan-kerja-di-best-web-media.html" rel="bookmark" title="Read more on Lowongan Kerja di Best Web Media">Lowongan Kerja di Best Web Media</a></h2>
+							<div class="author">
+								<em>By</em>: <strong>Pupung Budi Purnama</strong>
+							</div>
+							<hr>
+							<p>
+								Best Web Media Solusi, sebuah perusahaan yang bergerak di bidang Web Design, Web Hosting, Corporate Identity, dan Multimedia. Membuka Lowongan untuk Part time remote Programmer Web dan Desainer Web (Bekerja di Rumah).
+							</p>
+						</div><!--post-->
+						{% endblock %}
+						
+					</div><!--left-->
+					<div class="right">
+						<!--right-->
+						<div class="focus">
+							{% block rightfocus %}{% endblock %}
+						</div>
+						<div class="main">
+							<!--main-->
+							{% block rightposts %}
+							<div class="post">
+								<!--post-->
+								<div class="category">
+									<a href="http://www.designmagz.com/category/berita" title="View all posts in Berita" rel="category tag">Berita</a>
+								</div>
+								<h2><a href="http://www.designmagz.com/berita/magzine-wordpress-gratis-dari-designmagz.html" rel="bookmark" title="Read more on MagZine – Wordpress Gratis dari Designmagz">MagZine – Wordpress Gratis dari Designmagz</a></h2>
+								<div class="author">
+									<em>By</em>: <strong>Pupung Budi Purnama</strong>
+								</div>
+								<hr>
+								<p>
+									Ya, bila Anda menyukai tampilan designmagz sekarang, Anda pun bisa memilikinya. Theme ini dinamakan MagZine, theme yang tampil dengan magazine style dan memiliki beberapa fitur menarik. Bila Anda tertarik untuk menggunakan, silakan unduh disitus ini.
+
+									Theme ini berlisensikan Creative Common Licence, dimana anda dapat menggunakannya secara gratis, selama signature / footer tidak dihapus atau di ubah.
+
+									Menyukainya? ada Komentar?
+								</p>
+							</div><!--post-->
+							{% endblock %}
+						</div><!--main-->
+						<div class="sidebar">
+							{% block rightsidebar %}{% endblock %}
+						</div>
+					</div><!--right-->
+					<div class="ffix"></div>
+				</div><!--content-->
+				<div class="footer">
+					<div class="creator">
+						
+					</div>
+					<div class="copyright">
+						
+					</div>
+				</div>
+			</div><!--container-->
+		</div><!--outer-->
+	</body>
+</html>

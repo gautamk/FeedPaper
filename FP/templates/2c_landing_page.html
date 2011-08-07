@@ -1,0 +1,43 @@
+{% extends "2c_landing_page_base.html" %}
+
+{% block keywords %}
+	{% for key in keywords %}
+						<li>
+							<a href="?keyword={{ key }}" accesskey="1"   title="Keyword">{{ key }}</a>
+						</li>
+	{% endfor %}
+{% endblock %}
+
+{% block leftposts %}
+{% for post in postsleft %}
+						<div class="post">
+							<!--post-->
+							
+							<h2><a href="{{ post.link_url }}" target="_blank" title="{{ post.title }}">{{ post.title }}</a></h2>
+							<div class="author">
+								<em>keyword</em>: <strong>{{ post.feed }}</strong>
+							</div>
+							<hr>
+							<p>
+								{{ post.description }}
+							</p>
+						</div><!--post-->
+{% endfor %}
+{% endblock %}
+
+{% block rightposts %}
+{% for post in postsright %}
+							<div class="post">
+							<!--post-->
+							
+							<h2><a href="{{ post.link_url }}" target="_blank" title="{{ post.title }}">{{ post.title }}</a></h2>
+							<div class="author">
+								<em>keyword</em>: <strong>{{ post.feed }}</strong>
+							</div>
+							<hr>
+							<p>
+								{{ post.description }}
+							</p>
+						</div><!--post-->
+{% endfor %}
+{% endblock %}

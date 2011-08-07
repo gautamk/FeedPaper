@@ -38,10 +38,35 @@ def unescape(text):
         return text # leave as is
     return re.sub("&#?\w+;", fixup, text)
 
+def TwoCollumnLandingPage (request):
+    if request.method == "GET":
+        Landing_page = '2c_landing_page.html'
+        template_values={
+                         'keywords':feedDB.objects.all(),
+                         }
+        try:
+            if request.GET['keyword'] != '' :
+                fdb = feedDB.objects.all().filter(keyword = request.GET['keyword'] )
+                posts = itemDB.objects.all().filter(feed = fdb)
+                for p in posts :
+                    p.description = unescape(p.description)
+                count = int ( posts.count() / 2 )
+                postsright = posts[:count]
+                postsleft = posts[count:]
+                template_values={
+                         'keywords':feedDB.objects.all(),
+                         'postsleft':postsleft,
+                         'postsright':postsright,
+                         }
+                return render_to_response(Landing_page , template_values)
+        except KeyError:
+            return render_to_response(Landing_page , template_values)
+                
 
 def LandingPage(request):
+    Landing_page = 'landing_page.html'
     if request.method == "GET":
-        t = loader.get_template('landing_page.html')
+        t = loader.get_template(Landing_page)
         template_values={
                          'keywords':feedDB.objects.all(),
                          }
@@ -55,9 +80,9 @@ def LandingPage(request):
                                  'keywords':feedDB.objects.all(),
                                  'posts':posts,
                                  }
-                return HttpResponse(render_to_string('landing_page.html', template_values))
+                return HttpResponse(render_to_string(Landing_page, template_values))
         except KeyError:
-            return HttpResponse(render_to_string('landing_page.html', template_values))
+            return HttpResponse(render_to_string(Landing_page, template_values))
 def CSVUploadView(request):
     from django.core.context_processors import csrf
     form = CSVUploadForm(request.POST, request.FILES)
