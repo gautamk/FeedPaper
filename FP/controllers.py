@@ -30,16 +30,23 @@ def calculate_checksum(str):
     
 
 # This function Parses and adds the CSV file to the feedDB
-def parseCSV(file , ignore_first_line = True):
+def parseCSV(file , ignore_first_line=True):
     """
     # This function Parses and adds the CSV file to the feedDB
     """
+    from django.db import IntegrityError
     reader = csv.reader(file)
     for row in reader:
         if ignore_first_line :
             ignore_first_line = False
             continue
-        feedDB(
-               keyword = row[0],
-               url = row[1],
-               ).save()
+        try:
+            feedDB(
+                   keyword=row[0],
+                   url=row[1],
+                   ).save()
+        except IntegrityError:
+            pass
+               
+               
+               

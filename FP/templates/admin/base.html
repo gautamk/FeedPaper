@@ -27,7 +27,9 @@
         <h2>
             <a href="/UpdateItems" ><button>Update Feeds</button></a>
             <a href="/ShowUpdateItems" ><button>Show Items on the Feed</button></a>
+            <a href="/UploadCSV" ><button>Import List of Feeds</button></a>
         </h2>
+
         <div id="user-tools">
             {% trans 'Welcome,' %}
             <strong>{% filter force_escape %}{% firstof user.first_name user.username %}{% endfilter %}</strong>.
