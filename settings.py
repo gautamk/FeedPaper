@@ -87,6 +87,8 @@ TEMPLATE_DIRS = (
     # for some reason the default fallback to templates directory doesn't work
 )
 
+STATIC_DOC_ROOT = '/home/gautam/Aptana Studio 3 Workspace/FeedPaper/src/FeedPaper/FP/templates/landing_page_files/'
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',

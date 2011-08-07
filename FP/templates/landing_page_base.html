@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Feed Paper</title>
+		<link rel="stylesheet" href="/site_media/screen.css" type="text/css" media="screen" charset="utf-8">
+		<style type="text/css">	html, body {
+				background: #d1d2d1 url(/site_media/background.jpg) top left repeat;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="content" class="clearfix">
+			<div id="header" class="clearfix">
+				<h1><a class="no_header" >Feed Paper</a></h1>
+			</div><!-- end #header -->
+			<div id="sidebar">
+				<div id="description">
+					Keywords
+				</div>
+				{% for key in keywords %}
+					<a class="page_link" href="?keyword={{ key }}"><span>{{ key }}</span></a>
+				{% endfor %}
+				<!--<div id="search">
+					<form action="" method="get">
+						<label><span>Search</span></label>
+						<input type="text" name="q" value="">
+						<input id="search_submit" type="submit" value="Search" alt="Search">
+					</form> 
+				</div>-->
+			</div><!-- end #sidebar -->
+			{% block posts %}
+			
+			{% endblock %}
+			
+			<!-- end .postcontainer -->
+		</div>
+		
+	</body>
+</html>

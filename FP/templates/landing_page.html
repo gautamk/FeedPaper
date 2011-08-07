@@ -1,0 +1,23 @@
+{% extends "landing_page_base.html" %}
+{% block posts %}
+	{% for post in posts %}
+				<div class="postcontainer clearfix">
+					<div class="post_inner_container clearfix">
+						<div class="post clearfix">
+							<div class="date_and_notes">
+								<a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+							</div>
+							<div class="quote">
+								<span class="quote">  </span>
+								<span class="source">{{ post.description }}</span>
+							</div>
+							<!--<div class="just_notes clearfix">
+								<a class="notes" href=""></a>
+								<a class="tags" href=""></a>
+							</div> -->
+						</div>
+						
+					</div><!-- end .post_inner_container -->
+				</div>
+	{% endfor %}
+{% endblock %}
