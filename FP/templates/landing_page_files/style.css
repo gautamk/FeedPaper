@@ -129,7 +129,7 @@ ul.nav li a:hover, ul.nav li a.active {
 }
 
 .left {
-	width: 260px;
+	width: 400px;
 	float: left;
 	padding: 10px;
 }
@@ -174,14 +174,14 @@ ul.nav li a:hover, ul.nav li a.active {
 	font-style: italic;
 }
 .focus {
-	width: 658px;
+	width: 400px;
 	padding: 10px;
 	border-bottom: 1px solid #eaeaea;
 	background-color: #fff;
 }
 .right {
-	float: left;
-	width: 678px;
+	float: right;
+	width: 500px;
 }
 .main {
 	width: 420px;

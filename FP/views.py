@@ -50,9 +50,9 @@ def TwoCollumnLandingPage (request):
                 posts = itemDB.objects.all().filter(feed = fdb)
                 for p in posts :
                     p.description = unescape(p.description)
-                count = int ( posts.count() / 2 )
-                postsright = posts[:count]
-                postsleft = posts[count:]
+                #count = int ( posts.count() / 2 ) 
+                postsright = posts[1::2] # Choose Odd Numbered Posts
+                postsleft = posts[0::2] # Choose Even Numbered Posts
                 template_values={
                          'keywords':feedDB.objects.all(),
                          'postsleft':postsleft,
